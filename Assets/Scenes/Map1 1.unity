@@ -332,7 +332,7 @@ MonoBehaviour:
   targets:
   - {fileID: 543450653664302056}
   smoothSpeed: 0.125
-  offset: {x: 6, y: 0, z: 2}
+  offset: {x: 7, y: 0, z: -14}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2474,6 +2474,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FightingController
   movementSpeed: 1
   rotationSpeed: 10
+  attackCooldown: 0.5
+  attackDamages: 5
+  attackAnimations:
+  - Attack1Animation
+  - Attack2Animation
+  - Attack3Animation
+  - Attack4Animation
 --- !u!4 &5901452235293344107
 Transform:
   m_ObjectHideFlags: 0
