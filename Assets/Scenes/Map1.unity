@@ -1088,6 +1088,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450653664302056}
+  - component: {fileID: 5866666021877746067}
   - component: {fileID: 5866666021877746066}
   - component: {fileID: 35664901}
   m_Layer: 0
@@ -2441,6 +2442,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5866666021877746067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149191084370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aae34ad9c84b31c46a765d6e8fa63b2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FightingController
+  movementSpeed: 1
+  rotationSpeed: 10
 --- !u!4 &5901452235293344107
 Transform:
   m_ObjectHideFlags: 0
