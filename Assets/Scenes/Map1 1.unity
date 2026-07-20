@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -316,6 +317,22 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120345d30bc00cc428a025deeba01af9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  targets:
+  - {fileID: 543450653664302056}
+  smoothSpeed: 0.125
+  offset: {x: 6, y: 0, z: 2}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,7 +979,7 @@ Transform:
   m_GameObject: {fileID: 1273288122165524284}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.01, y: 0.39, z: 4.83}
+  m_LocalPosition: {x: 0.65, y: 0.55, z: 4.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1026,7 +1043,7 @@ Transform:
   m_GameObject: {fileID: 919132149191084370}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.69, y: -0.02, z: 2.62}
+  m_LocalPosition: {x: 3.53, y: -0.011, z: 2.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2332,7 +2349,7 @@ Transform:
   m_GameObject: {fileID: 1082271958592973321}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.62, y: 1.3579782, z: 4.9443163e-17}
+  m_LocalPosition: {x: 0.06797562, y: 1.3579782, z: 4.9443163e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2455,7 +2472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae34ad9c84b31c46a765d6e8fa63b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FightingController
-  movementSpeed: 2
+  movementSpeed: 1
   rotationSpeed: 10
 --- !u!4 &5901452235293344107
 Transform:
