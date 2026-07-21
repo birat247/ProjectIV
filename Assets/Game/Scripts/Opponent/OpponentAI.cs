@@ -44,8 +44,17 @@ public class OpponentAI : MonoBehaviour
     public ParticleSystem attack3Effect;
     public ParticleSystem attack4Effect;
 
+
+    public AudioClip[] hitSounds;
+
+    [Header("Health")]
+    public int maxHealth = 100;
+    public int currentHealth;
+
+
     void Awake()
     {
+        currentHealth = maxHealth;
         characterController =
             GetComponent<CharacterController>();
 
@@ -185,19 +194,35 @@ public class OpponentAI : MonoBehaviour
             Random.Range(1, 5);
     }
 
-    public IEnumerator PlayHitDamageAnimation(
-        int takeDamage)
+    public IEnumerator PlayHitDamageAnimation(int takeDamage)
     {
-        yield return new WaitForSeconds(
-            0.5f
-        );
+        yield return new WaitForSeconds(0.5f);
 
-        animator.Play(
-            "HitDamageAnimation"
-        );
+        // Play hit sound here
+        if (hitSounds != null && hitSounds.Length > 0)
+        {
+            int randomIndex = Random.Range(0, hitSounds.Length);
+            AudioSource.PlayClipAtPoint(hitSounds[randomIndex], transform.position);
+        }
 
-        // Reduce AI health here if needed
+        // Reduce health here
+        currentHealth -= takeDamage;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+
+
+        animator.Play("HitDamageAnimation");
     }
+
+    // Handle player death
+    void Die()
+    {
+        Debug.Log("Opponent has died.");
+        // Implement death logic here (e.g., respawn, game over screen)
+    }
+
 
     public void Attack1Effect()
     {

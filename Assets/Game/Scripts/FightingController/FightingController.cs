@@ -36,8 +36,16 @@ public class FightingController : MonoBehaviour
     public ParticleSystem attack3Effect;
     public ParticleSystem attack4Effect;
 
+    public AudioClip[] hitSounds;
+
+    [Header("Health")]
+    public int maxHealth = 100;
+    public int currentHealth;
+
     void Awake()
     {
+        currentHealth = maxHealth;
+
         characterController =
             GetComponent<CharacterController>();
 
@@ -233,19 +241,33 @@ public class FightingController : MonoBehaviour
         }
     }
 
-    public IEnumerator
-        PlayHitDamageAnimation(
-            int takeDamage
-        )
+    public IEnumerator PlayHitDamageAnimation(int takeDamage)
     {
-        animator.Play(
-            "HitDamageAnimation"
-        );
+      yield return new WaitForSeconds(0.5f);
+
+        // Play hit sound here
+        if (hitSounds != null && hitSounds.Length > 0)
+        {
+            int randomIndex = Random.Range(0, hitSounds.Length);
+            AudioSource.PlayClipAtPoint(hitSounds[randomIndex], transform.position);
+        }
 
         // Reduce health here
-        // health -= takeDamage;
+        currentHealth -= takeDamage;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
 
-        yield return null;
+
+        animator.Play("HitDamageAnimation");
+    }
+
+    // Handle player death
+    void Die()
+    {
+        Debug.Log("Player has died.");
+        // Implement death logic here (e.g., respawn, game over screen)
     }
 
     // Animation Events
