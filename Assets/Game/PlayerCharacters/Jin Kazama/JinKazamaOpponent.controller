@@ -27,7 +27,7 @@ AnimatorStateTransition:
   m_CanTransitionToSelf: 1
 --- !u!1107 &-8039374037352911904
 AnimatorStateMachine:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -161,7 +161,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0ca7da7150167f24fbd31dffab5ba14e, type: 2}
+  m_Motion: {fileID: 7400000, guid: 79aa5b66a676e3b45b80c73bf2a1018e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -272,7 +272,7 @@ AnimatorController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: JinKazamaOpponent
-  serializedVersion: 5
+  serializedVersion: 6
   m_AnimatorParameters:
   - m_Name: Walking
     m_Type: 4
@@ -293,6 +293,7 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+  m_EvaluateTransitionsOnStart: 0
 --- !u!1102 &355747077363319579
 AnimatorState:
   serializedVersion: 6
@@ -368,7 +369,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 20f7e62608c6338479c0e35df2192353, type: 2}
+  m_Motion: {fileID: 7400000, guid: 0a000fa63f637f94381db8723290ad4b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

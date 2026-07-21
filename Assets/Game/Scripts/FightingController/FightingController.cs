@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class FightingController : MonoBehaviour
@@ -24,6 +25,9 @@ public class FightingController : MonoBehaviour
     [Header("Player Dodge")]
     public float dodgeDistance = 2f;
 
+    public float attackRadius = 2.2f;
+    public Transform[] opponents;
+
     private float lastAttackTime;
 
     [Header("Effects and Sound")]
@@ -34,8 +38,11 @@ public class FightingController : MonoBehaviour
 
     void Awake()
     {
-        characterController = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
+        characterController =
+            GetComponent<CharacterController>();
+
+        animator =
+            GetComponent<Animator>();
 
         if (characterController == null)
         {
@@ -96,88 +103,197 @@ public class FightingController : MonoBehaviour
         if (movement != Vector3.zero)
         {
             Quaternion targetRotation =
-                Quaternion.LookRotation(movement);
+                Quaternion.LookRotation(
+                    movement
+                );
 
             transform.rotation =
                 Quaternion.Slerp(
                     transform.rotation,
                     targetRotation,
-                    rotationSpeed * Time.deltaTime);
+                    rotationSpeed *
+                    Time.deltaTime
+                );
 
-            animator.SetBool("Walking", true);
+            animator.SetBool(
+                "Walking",
+                true
+            );
         }
         else
         {
-            animator.SetBool("Walking", false);
+            animator.SetBool(
+                "Walking",
+                false
+            );
         }
 
         characterController.Move(
             movement *
             movementSpeed *
-            Time.deltaTime);
+            Time.deltaTime
+        );
     }
 
-    void PerformAttack(int attackIndex)
+    void PerformAttack(
+        int attackIndex
+    )
     {
         if (attackIndex < 0 ||
-            attackIndex >= attackAnimations.Length)
+            attackIndex >=
+            attackAnimations.Length)
             return;
 
-        if (Time.time - lastAttackTime >
+        if (Time.time -
+            lastAttackTime >
             attackCooldown)
         {
             animator.Play(
-                attackAnimations[attackIndex]);
+                attackAnimations[
+                    attackIndex
+                ]
+            );
 
             Debug.Log(
                 "Performed attack "
                 + (attackIndex + 1)
                 + " dealing "
                 + attackDamages
-                + " damage");
+                + " damage"
+            );
 
-            lastAttackTime = Time.time;
+            lastAttackTime =
+                Time.time;
+
+            // Loop through all opponents
+            foreach (
+                Transform opponent
+                in opponents
+            )
+            {
+                if (opponent == null)
+                    continue;
+
+                float distance =
+                    Vector3.Distance(
+                        transform.position,
+                        opponent.position
+                    );
+
+                if (distance <=
+                    attackRadius)
+                {
+                    OpponentAI
+                        opponentAI =
+                        opponent
+                        .GetComponent
+                        <OpponentAI>();
+
+                    if (
+                        opponentAI !=
+                        null
+                    )
+                    {
+                        opponentAI
+                        .StartCoroutine(
+                            opponentAI
+                            .PlayHitDamageAnimation(
+                                attackDamages
+                            )
+                        );
+                    }
+                }
+            }
         }
         else
         {
             Debug.Log(
-                "Cannot perform attack yet. Cooldown active.");
+                "Cannot perform attack yet. Cooldown active."
+            );
         }
     }
 
     void PerformDodgeFront()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(
+                KeyCode.E))
         {
-            animator.Play("DodgeFrontAnimation");
+            animator.Play(
+                "DodgeFrontAnimation"
+            );
 
-            Vector3 dodgeDirection =
+            Vector3
+                dodgeDirection =
                 transform.forward *
                 dodgeDistance;
 
             characterController.Move(
-                dodgeDirection);
+                dodgeDirection
+            );
         }
     }
 
+    public IEnumerator
+        PlayHitDamageAnimation(
+            int takeDamage
+        )
+    {
+        animator.Play(
+            "HitDamageAnimation"
+        );
+
+        // Reduce health here
+        // health -= takeDamage;
+
+        yield return null;
+    }
+
     // Animation Events
-    public void Attack1Effect()
+    public void
+        Attack1Effect()
     {
-        attack1Effect.Play();
+        if (
+            attack1Effect !=
+            null
+        )
+        {
+            attack1Effect.Play();
+        }
     }
 
-    public void Attack2Effect()
+    public void
+        Attack2Effect()
     {
-        attack2Effect.Play();
+        if (
+            attack2Effect !=
+            null
+        )
+        {
+            attack2Effect.Play();
+        }
     }
 
-    public void Attack3Effect()
+    public void
+        Attack3Effect()
     {
-        attack3Effect.Play();
+        if (
+            attack3Effect !=
+            null
+        )
+        {
+            attack3Effect.Play();
+        }
     }
 
-    public void Attack4Effect()
+    public void
+        Attack4Effect()
     {
-        attack4Effect.Play();
+        if (
+            attack4Effect !=
+            null
+        )
+        {
+            attack4Effect.Play();
+        }
     }
 }

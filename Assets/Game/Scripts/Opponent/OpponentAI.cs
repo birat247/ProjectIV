@@ -4,23 +4,38 @@ using UnityEngine;
 
 public class OpponentAI : MonoBehaviour
 {
-    [Header("Oppponent Movement")]
+    [Header("Opponent Movement")]
     public float movementSpeed = 1f;
     public float rotationSpeed = 10f;
-    public CharacterController characterController;
-    public Animator animator;
+
+    private CharacterController characterController;
+    private Animator animator;
 
     [Header("Opponent Fight")]
     public float attackCooldown = 0.5f;
-    public int attackDamages = 5;
-    public string[] attackAnimations = { "Attack1Animation", "Attack2Animation", "Attack3Animation", "Attack4Animation" };
+    public int attackDamage = 5;
+
+    public string[] attackAnimations =
+    {
+        "Attack1Animation",
+        "Attack2Animation",
+        "Attack3Animation",
+        "Attack4Animation"
+    };
+
     public float dodgeDistance = 2f;
     public int attackCount = 0;
     public int randomNumber;
     public float attackRadius = 2f;
-    public FightingController[] fightingController;
-    public Transform[] players;
+
+    [Header("Target")]
+    public Transform player;
+
+    // Reference to player script
+    private FightingController fightingController;
+
     public bool isTakingDamage;
+
     private float lastAttackTime;
 
     [Header("Effects and Sound")]
@@ -31,67 +46,180 @@ public class OpponentAI : MonoBehaviour
 
     void Awake()
     {
+        characterController =
+            GetComponent<CharacterController>();
+
+        animator =
+            GetComponent<Animator>();
+
         createRandomNumber();
+
+        // Automatically find player
+        if (player == null)
+        {
+            GameObject p =
+                GameObject.FindGameObjectWithTag("Player");
+
+            if (p != null)
+            {
+                player = p.transform;
+
+                fightingController =
+                    p.GetComponent<FightingController>();
+            }
+        }
+        else
+        {
+            fightingController =
+                player.GetComponent<FightingController>();
+        }
     }
 
     void Update()
     {
-        for (int i = 0; i < fightingController.Length; i++)
+        if (player == null)
+            return;
+
+        TrackPlayer();
+    }
+
+    void TrackPlayer()
+    {
+        Vector3 direction =
+            player.position - transform.position;
+
+        direction.y = 0f;
+
+        float distance = direction.magnitude;
+
+        // Face player
+        if (direction != Vector3.zero)
         {
-            if (players[i].gameObject.activeSelf)
+            Quaternion targetRotation =
+                Quaternion.LookRotation(direction);
+
+            transform.rotation =
+                Quaternion.Slerp(
+                    transform.rotation,
+                    targetRotation,
+                    rotationSpeed * Time.deltaTime
+                );
+        }
+
+        // Move towards player
+        if (distance > attackRadius)
+        {
+            animator.SetBool("Walking", true);
+
+            characterController.Move(
+                direction.normalized *
+                movementSpeed *
+                Time.deltaTime
+            );
+        }
+        else
+        {
+            animator.SetBool("Walking", false);
+
+            if (Time.time - lastAttackTime >
+                attackCooldown)
             {
-                Vector3 direction = (players[i].position - transform.position).normalized;
-                characterController.Move(direction * movementSpeed * Time.deltaTime);
+                int attackIndex =
+                    Random.Range(
+                        0,
+                        attackAnimations.Length
+                    );
 
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-                animator.SetBool("Walking", true);
+                PerformAttack(attackIndex);
             }
         }
     }
 
     void PerformAttack(int attackIndex)
     {
-        animator.Play(attackAnimations[attackIndex]);
+        animator.Play(
+            attackAnimations[attackIndex]
+        );
 
-        int damage = attackDamages;
-        Debug.Log("Performed attack " + (attackIndex + 1) + " dealing " + damage + "damage");
+        Debug.Log(
+            "Performed attack " +
+            (attackIndex + 1) +
+            " dealing " +
+            attackDamage +
+            " damage."
+        );
+
+        // Play damage animation on player
+        if (fightingController != null)
+        {
+            fightingController.StartCoroutine(
+                fightingController
+                .PlayHitDamageAnimation(
+                    attackDamage
+                )
+            );
+        }
 
         lastAttackTime = Time.time;
     }
 
     void PerformDodgeFront()
     {
-        animator.Play("DodgeFrontAnimation");
+        animator.Play(
+            "DodgeFrontAnimation"
+        );
 
-        Vector3 dodgeDirection = -transform.forward * dodgeDistance;
+        Vector3 dodgeDirection =
+            -transform.forward *
+            dodgeDistance;
 
-        characterController.SimpleMove(dodgeDirection);
+        characterController.Move(
+            dodgeDirection *
+            Time.deltaTime
+        );
     }
 
     void createRandomNumber()
     {
-        randomNumber = Random.Range(1, 5);
+        randomNumber =
+            Random.Range(1, 5);
+    }
+
+    public IEnumerator PlayHitDamageAnimation(
+        int takeDamage)
+    {
+        yield return new WaitForSeconds(
+            0.5f
+        );
+
+        animator.Play(
+            "HitDamageAnimation"
+        );
+
+        // Reduce AI health here if needed
     }
 
     public void Attack1Effect()
     {
-        attack1Effect.Play();
+        if (attack1Effect != null)
+            attack1Effect.Play();
     }
 
     public void Attack2Effect()
     {
-        attack2Effect.Play();
+        if (attack2Effect != null)
+            attack2Effect.Play();
     }
 
     public void Attack3Effect()
     {
-        attack3Effect.Play();
+        if (attack3Effect != null)
+            attack3Effect.Play();
     }
 
     public void Attack4Effect()
     {
-        attack4Effect.Play();
+        if (attack4Effect != null)
+            attack4Effect.Play();
     }
 }
