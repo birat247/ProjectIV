@@ -26,6 +26,12 @@ public class FightingController : MonoBehaviour
 
     private float lastAttackTime;
 
+    [Header("Effects and Sound")]
+    public ParticleSystem attack1Effect;
+    public ParticleSystem attack2Effect;
+    public ParticleSystem attack3Effect;
+    public ParticleSystem attack4Effect;
+
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -75,8 +81,11 @@ public class FightingController : MonoBehaviour
 
     void PerformMovement()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput =
+            Input.GetAxis("Horizontal");
+
+        float verticalInput =
+            Input.GetAxis("Vertical");
 
         Vector3 movement =
             new Vector3(
@@ -149,5 +158,30 @@ public class FightingController : MonoBehaviour
             characterController.Move(
                 dodgeDirection);
         }
+    }
+
+    // Animation Events
+    public void PlayAttack1Effect()
+    {
+        if (attack1Effect != null)
+            attack1Effect.Play();
+    }
+
+    public void PlayAttack2Effect()
+    {
+        if (attack2Effect != null)
+            attack2Effect.Play();
+    }
+
+    public void PlayAttack3Effect()
+    {
+        if (attack3Effect != null)
+            attack3Effect.Play();
+    }
+
+    public void PlayAttack4Effect()
+    {
+        if (attack4Effect != null)
+            attack4Effect.Play();
     }
 }
