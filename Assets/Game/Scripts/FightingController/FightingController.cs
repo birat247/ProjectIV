@@ -161,27 +161,23 @@ public class FightingController : MonoBehaviour
     }
 
     // Animation Events
-    public void PlayAttack1Effect()
+    public void Attack1Effect()
     {
-        if (attack1Effect != null)
-            attack1Effect.Play();
+        attack1Effect.Play();
     }
 
-    public void PlayAttack2Effect()
+    public void Attack2Effect()
     {
-        if (attack2Effect != null)
-            attack2Effect.Play();
+        attack2Effect.Play();
     }
 
-    public void PlayAttack3Effect()
+    public void Attack3Effect()
     {
-        if (attack3Effect != null)
-            attack3Effect.Play();
+        attack3Effect.Play();
     }
 
-    public void PlayAttack4Effect()
+    public void Attack4Effect()
     {
-        if (attack4Effect != null)
-            attack4Effect.Play();
+        attack4Effect.Play();
     }
 }
