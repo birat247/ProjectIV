@@ -23,7 +23,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    void Pause()
+   public void Pause()
     {
         isPaused = true;
         Time.timeScale = 0f;
@@ -32,7 +32,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = true;
     }
 
-    void Resume()
+   public void Resume()
     {
         isPaused = false;
         Time.timeScale = 1f;
