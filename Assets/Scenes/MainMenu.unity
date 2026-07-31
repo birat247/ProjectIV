@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 5792362959981090045}
   - component: {fileID: 2299387434629208811}
   m_Layer: 5
-  m_Name: Resume
+  m_Name: Play
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -932,7 +932,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Main Menu
+  m_Text: 'Options
+
+'
 --- !u!224 &3613090145660229064
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1075,7 +1077,7 @@ GameObject:
   - component: {fileID: 6456322560287448804}
   - component: {fileID: 3234894167278885203}
   m_Layer: 5
-  m_Name: BackToMainMenu
+  m_Name: Options
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1247,7 +1249,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Resume
+  m_Text: 'Play
 
 '
 --- !u!114 &8285491982050497161
