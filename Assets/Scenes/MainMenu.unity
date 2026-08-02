@@ -782,6 +782,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 404b4f8a57f10554b983412898b37219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
+  mainMenu: {fileID: 7699193157306133002}
+  selectCharacterAndStageMenu: {fileID: 0}
+  optionMenu: {fileID: 0}
+  controlsMenu: {fileID: 0}
 --- !u!1 &920231455
 GameObject:
   m_ObjectHideFlags: 0
