@@ -785,7 +785,7 @@ MonoBehaviour:
   mainMenu: {fileID: 7699193157306133002}
   selectCharacterAndStageMenu: {fileID: 0}
   optionMenu: {fileID: 0}
-  controlsMenu: {fileID: 0}
+  controlsMenu: {fileID: 932899235}
 --- !u!1 &920231455
 GameObject:
   m_ObjectHideFlags: 0
