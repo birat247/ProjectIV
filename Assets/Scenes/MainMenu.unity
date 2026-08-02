@@ -783,7 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
   mainMenu: {fileID: 7699193157306133002}
-  selectCharacterAndStageMenu: {fileID: 0}
+  selectCharacterAndStageMenu: {fileID: 920231455}
   optionMenu: {fileID: 289455804}
   controlsMenu: {fileID: 932899235}
 --- !u!1 &920231455
