@@ -11,5 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 72e609ea992608d49bdc6736113ec2dc
+  - enabled: 1
+    path: Assets/Scenes/SelectCharacter.unity
+    guid: de35e1c9ff3d9984a939411d41d58da3
+  - enabled: 1
+    path: Assets/Scenes/SelectStage.unity
+    guid: 3338ea261e9165f4b8501d736df5060f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
